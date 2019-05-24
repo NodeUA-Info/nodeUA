@@ -10,7 +10,7 @@ export default class ChapterList extends Component {
 
   showChapters() {
     const { chapters, chaptersLoading } = this.props;
-
+    console.log(chapters)
     if (!chaptersLoading && chapters.length > 0) {
       return chapters.map(chapter => {
         return (

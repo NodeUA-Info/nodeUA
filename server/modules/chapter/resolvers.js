@@ -1,5 +1,5 @@
 // #1 Import the model created with mongoose
-const Chapter = require('./models/chapter.model');
+
 
 // #2 Create resolver functions to handle GraphQL queries
 /**
@@ -9,22 +9,25 @@ const Chapter = require('./models/chapter.model');
 const resolvers = {
   Query: {
     // Query which returns posts list
-    chapters: () => Chapter.find({}),
+    getChapters: async (root, args, { Chapter }) => {
+      const allChapters = await Chapter.find();
+      return allChapters;
+    }
   },
 
-/**
- * Mutation resolver addPost creates a new document in MongoDB
- * in response to the "addPost" mutation in GraphQL schema.
- * The mutation resolvers must return the created object.
- */
-  // Mutation: {
-  //   addPost: (parent, post) => {
-  //     // Create a new record in the database
-  //     const newPost = new Post({ title: post.title, content: post.content });
-  //     // Save the record and return it
-  //     return newPost.save();
-  //   }
-  // }
+  /**
+   * Mutation resolver addPost creates a new document in MongoDB
+   * in response to the "addPost" mutation in GraphQL schema.
+   * The mutation resolvers must return the created object.
+   */
+  Mutation: {
+    addChapter: async (root, { title, content }, { Chapter }) => {
+      // Create a new record in the database
+      // Save the record and return it
+      const newChapter = await new Chapter({ title: title, content: content }).save();
+      return newChapter;
+    }
+  }
 };
 
 module.exports = resolvers;

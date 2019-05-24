@@ -1,14 +1,20 @@
 // #1 Import the constructor Schema and the model() method
 // Note the use of ES6 desctructuring
-const { Schema, model }  = require('mongoose');
+const mongoose  = require('mongoose');
+
+const Schema = mongoose.Schema;
 
 // #2 Instantiate a schema using mongoose Schema
 const chapterSchema = new Schema({
-  title: String,
-  content: String
+  title: {
+    type: String,
+    required: true
+  },
+  content: {
+    type: String,
+    required: true
+  }
 });
 
 // #3 Create a model with mongoose model() method
-const Chapter = model('chapter', chapterSchema);
-
-module.exports = Chapter;
+module.exports = mongoose.model('Chapter', chapterSchema);

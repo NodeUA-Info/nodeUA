@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 // #2 Create a query string to connect to MongoDB server
-const DB_URI = 'mongodb://localhost:27017/graphql-app';
+const DB_URI = 'mongodb+srv://admin:admin@cluster0-ze1d7.mongodb.net/test?retryWrites=true';
 
 // #3 Connect to MongoDB
 mongoose.connect(DB_URI, { useNewUrlParser: true });

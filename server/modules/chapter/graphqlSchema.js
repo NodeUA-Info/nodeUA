@@ -12,12 +12,12 @@ const typeDefs = gql`
   },
   #4 Define the query type that must respond to 'chapters' query
   type Query {
-    chapters: [Chapter]
+    getChapters: [Chapter]
   }
   #5 Define a mutation to add new posts with two required fields
-  # type Mutation {
-  #   #addPost(title: String!, content: String!): Post,
-  # }
+   type Mutation {
+     addChapter(title: String!, content: String!): Chapter,
+   }
 `;
 
 module.exports = typeDefs;

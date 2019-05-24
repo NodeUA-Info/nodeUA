@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 
 export const GET_CHAPTERS = gql`
   {
-    chapters {
+    getChapters {
       _id
       title
       content
@@ -16,10 +16,11 @@ const withChapters = Component => props => {
   return (
     <Query query={GET_CHAPTERS}>
       {({ loading, data }) => {
+        console.log(data);
         return (
           <Component
             chaptersLoading={loading}
-            chapters={data && data.chapters}
+            chapters={data && data.getChapters}
             {...props}
           />
         );
