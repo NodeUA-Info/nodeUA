@@ -4,16 +4,18 @@ const { ApolloServer } = require("apollo-server-express");
 
 // #2 Import mongoose
 const mongoose = require("./config/database");
-const Chapter = require('./modules/chapter/models/Chapter');
+const Chapter = require('./models/Chapter');
+const User = require('./models/User');
+
 
 // #3 Import GraphQL type definitions
-const typeDefs = require("./modules/chapter/graphqlSchema");
+const typeDefs = require("./typeDefs");
 
 // #4 Import GraphQL resolvers
-const resolvers = require("./modules/chapter/resolvers");
+const resolvers = require("./resolvers/resolvers");
 
 // #5 Initialize an Apollo server
-const server = new ApolloServer({ typeDefs, resolvers, context: { Chapter } });
+const server = new ApolloServer({ typeDefs, resolvers, context: { Chapter, User } });
 
 // #6 Initialize an Express application
 const app = express();

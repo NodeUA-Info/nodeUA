@@ -1,5 +1,3 @@
-// #1 Import the constructor Schema and the model() method
-// Note the use of ES6 desctructuring
 const mongoose  = require('mongoose');
 
 const Schema = mongoose.Schema;
