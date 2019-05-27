@@ -1,5 +1,8 @@
 import React from "react";
+import { ApolloProvider } from "react-apollo";
+import apolloClient from "./config/createApolloClient";
 import ReactDOM from "react-dom";
+
 import {
   BrowserRouter as Router,
   Route,
@@ -23,4 +26,9 @@ const Root = () => (
   </Router>
 );
 
-ReactDOM.render(<Root />, document.getElementById("root"));
+ReactDOM.render(
+  <ApolloProvider client={apolloClient}>
+    <Root />
+  </ApolloProvider>,
+  document.getElementById("root")
+);
