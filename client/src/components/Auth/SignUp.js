@@ -1,8 +1,86 @@
 import React, { Component } from "react";
+import {
+  Container,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button
+} from "reactstrap";
 
 class SignUp extends Component {
+  state = {
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirmation: ""
+  };
+
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
   render() {
-    return <div>SignUp Page</div>;
+    const { username, email, password, passwordConfirmation } = this.state;
+
+    return (
+      <Container className="App">
+        <h2>Зареєструватися</h2>
+        <Form className="form">
+          <Col>
+            <FormGroup>
+              <Label>Логін</Label>
+              <Input
+                type="text"
+                name="username"
+                placeholder="username"
+                value={username}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input
+                type="email"
+                name="email"
+                placeholder="myemail@email.com"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+              <Label for="examplePassword">Пароль</Label>
+              <Input
+                type="password"
+                name="password"
+                placeholder="********"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+              <Label for="examplePassword">Підтвердити пароль</Label>
+              <Input
+                type="password"
+                name="passwordConfirmation"
+                placeholder="********"
+                value={passwordConfirmation}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+          </Col>
+          <Button>Зареєструватися</Button>
+        </Form>
+      </Container>
+    );
   }
 }
 
