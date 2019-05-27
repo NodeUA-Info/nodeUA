@@ -1,5 +1,6 @@
 // #1 Import Express and Apollo Server
 const express = require("express");
+require("dotenv").config({ path: "variables.env" });
 const { ApolloServer } = require("apollo-server-express");
 
 // #2 Import mongoose
