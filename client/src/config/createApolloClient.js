@@ -3,7 +3,7 @@ import ApolloClient from "apollo-boost";
 const client = new ApolloClient({
   uri: "http://localhost:4444/graphql",
   fetchOptions: {
-    credenrials: "include"
+    credentials: "include"
   },
   request: operation => {
     const token = localStorage.getItem("token");
