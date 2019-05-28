@@ -21,11 +21,11 @@ const resolvers = require("./resolvers/resolvers");
 const server = new ApolloServer({
   typeDefs, 
   resolvers,
-  context: ({ req }) => ({
-    currentUser: getScope(req.headers.authorization),
-    Chapter, 
-    User
-  })
+  context: ({ req }) => {
+    const token = req.headers.authorization;
+    const currentUser = getUser(token);
+    return { Chapter, User, currentUser }
+  }
 });
 
 // #6 Initialize an Express application
@@ -38,11 +38,11 @@ const corsOptions = {
 
 // Set up JWT authentication middleware
 app.use(async (req, res, next) => {
-  const token = req.headers['authorization'];
+  const token = req.headers.authorization;
   console.log(token);
   if (token !== 'null') {
     try {
-      const currentUser = await jwt.verify(token, process.env.SECRET);
+      const currentUser = jwt.verify(token, process.env.SECRET);
       req.currentUser = currentUser;
     } catch (err) {
       console.error(err);
