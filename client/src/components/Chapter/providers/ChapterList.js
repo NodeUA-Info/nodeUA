@@ -1,16 +1,7 @@
 import React from "react";
-import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
 
-export const GET_CHAPTERS = gql`
-  {
-    getChapters {
-      _id
-      title
-      content
-    }
-  }
-`;
+import { GET_CHAPTERS } from "../../../queries";
 
 const withChapters = Component => props => {
   return (
