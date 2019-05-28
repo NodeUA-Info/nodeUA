@@ -13,6 +13,7 @@ import App from "./components/App";
 import Navigation from "./components/Navigation/Navigation";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
+import withSession from "./components/withSession";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -30,9 +31,11 @@ const Root = () => (
   </Router>
 );
 
+const RootWithSession = withSession(Root);
+
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
-    <Root />
+    <RootWithSession />
   </ApolloProvider>,
   document.getElementById("root")
 );
