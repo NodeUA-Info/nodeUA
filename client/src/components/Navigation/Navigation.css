@@ -1,0 +1,32 @@
+.main_nav {
+  display: flex;
+  align-items: center;
+  color: #333;
+  background-image: url(../../assets/test-bg.png);
+  background-size: 50%;
+  background-position: center;
+  background-color: #6de069;
+}
+
+.nav_container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.nav_link {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: 20px;
+}
+
+.nav_content {
+  vertical-align: middle;
+}
+
+.logo {
+  height: 4rem;
+}
+
+.transparent {
+  background-color: transparent;
+}

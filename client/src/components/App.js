@@ -5,7 +5,11 @@ import "./App.css";
 
 class App extends Component {
   render() {
-    return <ChapterList />;
+    return (
+      <div className="App">
+        <ChapterList />
+      </div>
+    );
   }
 }
 
