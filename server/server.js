@@ -19,11 +19,11 @@ const resolvers = require("./resolvers/resolvers");
 
 // #5 Initialize an Apollo server
 const server = new ApolloServer({
-  typeDefs, 
+  typeDefs,
   resolvers,
-  context: ({ req }) => {
-    const token = req.headers.authorization;
-    const currentUser = getUser(token);
+  context: ({ req: { currentUser } }) => {
+    // const token = req.headers.authorization;
+    // const currentUser = getUser(token);
     return { Chapter, User, currentUser }
   }
 });
@@ -42,7 +42,7 @@ app.use(async (req, res, next) => {
   console.log(token);
   if (token !== 'null') {
     try {
-      const currentUser = jwt.verify(token, process.env.SECRET);
+      const currentUser = await jwt.verify(token, process.env.SECRET);
       req.currentUser = currentUser;
     } catch (err) {
       console.error(err);
