@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Chapters } from "./Chapter";
+import ChapterList from "./Chapters/ChapterList";
 
 import "./App.css";
 
 class App extends Component {
   render() {
-    return <Chapters />;
+    return <ChapterList />;
   }
 }
 
