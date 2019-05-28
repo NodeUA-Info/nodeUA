@@ -11,12 +11,23 @@ import {
   Button
 } from "reactstrap";
 
+import Error from "../Error";
+
+const initialState = {
+  username: "",
+  email: "",
+  validate: {
+    emailState: ""
+  },
+  password: "",
+  passwordConfirmation: ""
+};
+
 class SignUp extends Component {
-  state = {
-    username: "",
-    email: "",
-    password: "",
-    passwordConfirmation: ""
+  state = { ...initialState };
+
+  clearState = () => {
+    this.setState({ ...initialState });
   };
 
   handleChange = event => {
@@ -28,12 +39,31 @@ class SignUp extends Component {
     event.preventDefault();
     signupUser().then(data => {
       console.log(data);
+      this.clearState();
     });
   };
 
+  validateForm = () => {
+    const { username, email, password, passwordConfirmation } = this.state;
+    const isInvalid =
+      !username || !email || !password || password !== passwordConfirmation;
+    return isInvalid;
+  };
+
+  validateEmail(e) {
+    const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const { validate } = this.state;
+    if (emailRex.test(e.target.value)) {
+      validate.emailState = "has-success";
+    } else {
+      validate.emailState = "has-danger";
+    }
+    this.setState({ validate });
+  }
+
   render() {
     const { username, email, password, passwordConfirmation } = this.state;
-
+    const { emailState } = this.state.validate;
     return (
       <Container className="App">
         <h2>Зареєструватися</h2>
@@ -67,7 +97,12 @@ class SignUp extends Component {
                       name="email"
                       placeholder="myemail@email.com"
                       value={email}
-                      onChange={this.handleChange}
+                      // valid={emailState === "has-success"}
+                      invalid={emailState === "has-danger"}
+                      onChange={e => {
+                        this.validateEmail(e);
+                        this.handleChange(e);
+                      }}
                     />
                   </FormGroup>
                 </Col>
@@ -95,7 +130,10 @@ class SignUp extends Component {
                     />
                   </FormGroup>
                 </Col>
-                <Button>Зареєструватися</Button>
+                <Button disabled={loading || this.validateForm()}>
+                  Зареєструватися
+                </Button>
+                {error && <Error error={error} />}
               </Form>
             );
           }}
