@@ -19,9 +19,16 @@ class SignUp extends Component {
     passwordConfirmation: ""
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
+  handleChange = event => {
+    const { name, value } = event.target;
     this.setState({ [name]: value });
+  };
+
+  handleSubmit = (event, signupUser) => {
+    event.preventDefault();
+    signupUser().then(data => {
+      console.log(data);
+    });
   };
 
   render() {
@@ -30,10 +37,16 @@ class SignUp extends Component {
     return (
       <Container className="App">
         <h2>Зареєструватися</h2>
-        <Mutation mutation={SIGNUP_USER}>
-          {() => {
+        <Mutation
+          mutation={SIGNUP_USER}
+          variables={{ username, email, password }}
+        >
+          {(signupUser, { data, loading, error }) => {
             return (
-              <Form className="form">
+              <Form
+                className="form"
+                onSubmit={event => this.handleSubmit(event, signupUser)}
+              >
                 <Col>
                   <FormGroup>
                     <Label>Логін</Label>
