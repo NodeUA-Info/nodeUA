@@ -2,6 +2,7 @@
 const express = require("express");
 require("dotenv").config({ path: "variables.env" });
 const { ApolloServer } = require("apollo-server-express");
+const jwt = require('jsonwebtoken');
 
 // #2 Import mongoose
 const mongoose = require("./config/database");
@@ -15,8 +16,17 @@ const typeDefs = require("./typeDefs");
 // #4 Import GraphQL resolvers
 const resolvers = require("./resolvers/resolvers");
 
+
 // #5 Initialize an Apollo server
-const server = new ApolloServer({ typeDefs, resolvers, context: { Chapter, User } });
+const server = new ApolloServer({
+  typeDefs, 
+  resolvers,
+  context: ({ req }) => ({
+    currentUser: getScope(req.headers.authorization),
+    Chapter, 
+    User
+  })
+});
 
 // #6 Initialize an Express application
 const app = express();
@@ -25,6 +35,22 @@ const corsOptions = {
   origin: "http://localhost:3000",
   credentials: true
 };
+
+// Set up JWT authentication middleware
+app.use(async (req, res, next) => {
+  const token = req.headers['authorization'];
+  console.log(token);
+  if (token !== 'null') {
+    try {
+      const currentUser = await jwt.verify(token, process.env.SECRET);
+      req.currentUser = currentUser;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  next();
+})
+
 
 // #7 Use the Express application as middleware in Apollo server
 server.applyMiddleware({ app, cors: corsOptions });
