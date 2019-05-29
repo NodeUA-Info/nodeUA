@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Mutation } from "react-apollo";
 import { SIGNUP_USER } from "../../queries";
 import {
-  Container,
+  // Container,
   Col,
   Form,
   FormGroup,
@@ -69,80 +69,87 @@ class SignUp extends Component {
     const { username, email, password, passwordConfirmation } = this.state;
     const { emailState } = this.state.validate;
     return (
-      <Container className="App">
-        <h2>Зареєструватися</h2>
-        <Mutation
-          mutation={SIGNUP_USER}
-          variables={{ username, email, password }}
-        >
-          {(signupUser, { data, loading, error }) => {
-            return (
-              <Form
-                className="form"
-                onSubmit={event => this.handleSubmit(event, signupUser)}
-              >
-                <Col>
-                  <FormGroup>
-                    <Label>Логін</Label>
-                    <Input
-                      type="text"
-                      name="username"
-                      placeholder="username"
-                      value={username}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label>Email</Label>
-                    <Input
-                      type="email"
-                      name="email"
-                      placeholder="myemail@email.com"
-                      value={email}
-                      // valid={emailState === "has-success"}
-                      invalid={emailState === "has-danger"}
-                      onChange={e => {
-                        this.validateEmail(e);
-                        this.handleChange(e);
-                      }}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label for="examplePassword">Пароль</Label>
-                    <Input
-                      type="password"
-                      name="password"
-                      placeholder="********"
-                      value={password}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label for="examplePassword">Підтвердити пароль</Label>
-                    <Input
-                      type="password"
-                      name="passwordConfirmation"
-                      placeholder="********"
-                      value={passwordConfirmation}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                </Col>
-                <Button disabled={loading || this.validateForm()}>
-                  Зареєструватися
-                </Button>
-                {error && <Error error={error} />}
-              </Form>
-            );
-          }}
-        </Mutation>
-      </Container>
+      <div className="form_container">
+        <div className="form_group">
+          <h2 className="form_title">Реєстрація</h2>
+          <Mutation
+            mutation={SIGNUP_USER}
+            variables={{ username, email, password }}
+          >
+            {(signupUser, { data, loading, error }) => {
+              return (
+                <Form
+                  className="form"
+                  onSubmit={event => this.handleSubmit(event, signupUser)}
+                >
+                  <Col>
+                    <FormGroup>
+                      <Label>Логін</Label>
+                      <Input
+                        type="text"
+                        name="username"
+                        placeholder="username"
+                        value={username}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup>
+                      <Label>Email</Label>
+                      <Input
+                        type="email"
+                        name="email"
+                        placeholder="myemail@email.com"
+                        value={email}
+                        // valid={emailState === "has-success"}
+                        invalid={emailState === "has-danger"}
+                        onChange={e => {
+                          this.validateEmail(e);
+                          this.handleChange(e);
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup>
+                      <Label for="examplePassword">Пароль</Label>
+                      <Input
+                        type="password"
+                        name="password"
+                        placeholder="********"
+                        value={password}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup>
+                      <Label for="examplePassword">Підтвердити пароль</Label>
+                      <Input
+                        type="password"
+                        name="passwordConfirmation"
+                        placeholder="********"
+                        value={passwordConfirmation}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Button
+                    className="form_btn"
+                    outline
+                    color="success"
+                    disabled={loading || this.validateForm()}
+                  >
+                    Зареєструватися
+                  </Button>
+                  {error && <Error error={error} />}
+                </Form>
+              );
+            }}
+          </Mutation>
+        </div>
+      </div>
     );
   }
 }

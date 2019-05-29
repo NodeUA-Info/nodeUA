@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Mutation } from "react-apollo";
 import { SIGNIN_USER } from "../../queries";
 import {
-  Container,
+  // Container,
   Col,
   Form,
   FormGroup,
@@ -50,46 +50,55 @@ class SignIn extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <Container className="App">
-        <h2>Вхід</h2>
-        <Mutation mutation={SIGNIN_USER} variables={{ username, password }}>
-          {(signinUser, { data, loading, error }) => {
-            return (
-              <Form
-                className="form"
-                onSubmit={event => this.handleSubmit(event, signinUser)}
-              >
-                <Col>
-                  <FormGroup>
-                    <Label>Логін</Label>
-                    <Input
-                      type="text"
-                      name="username"
-                      placeholder="username"
-                      value={username}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label for="examplePassword">Пароль</Label>
-                    <Input
-                      type="password"
-                      name="password"
-                      placeholder="********"
-                      value={password}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                </Col>
-                <Button disabled={loading || this.validateForm()}>Вхід</Button>
-                {error && <Error error={error} />}
-              </Form>
-            );
-          }}
-        </Mutation>
-      </Container>
+      <div className="form_container">
+        <div className="form_group">
+          <h2 className="form_title">Вхід</h2>
+          <Mutation mutation={SIGNIN_USER} variables={{ username, password }}>
+            {(signinUser, { data, loading, error }) => {
+              return (
+                <Form
+                  className="form"
+                  onSubmit={event => this.handleSubmit(event, signinUser)}
+                >
+                  <Col>
+                    <FormGroup>
+                      <Label>Логін</Label>
+                      <Input
+                        type="text"
+                        name="username"
+                        placeholder="username"
+                        value={username}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup>
+                      <Label for="examplePassword">Пароль</Label>
+                      <Input
+                        type="password"
+                        name="password"
+                        placeholder="********"
+                        value={password}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Button
+                    className="form_btn"
+                    outline
+                    color="success"
+                    disabled={loading || this.validateForm()}
+                  >
+                    Вхід
+                  </Button>
+                  {error && <Error error={error} />}
+                </Form>
+              );
+            }}
+          </Mutation>
+        </div>
+      </div>
     );
   }
 }
