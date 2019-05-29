@@ -11,6 +11,16 @@ export const GET_CHAPTERS = gql`
   }
 `;
 
+export const GET_CHAPTER = gql`
+  query($_id: ID!) {
+    getChapter(_id: $_id) {
+      _id
+      title
+      content
+    }
+  }
+`;
+
 /* Chapter Mutations */
 
 /* User Queries */
