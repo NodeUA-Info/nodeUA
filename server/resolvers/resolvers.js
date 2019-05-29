@@ -14,6 +14,11 @@ const resolvers = {
       return allChapters;
     },
 
+    getChapter: async (root, { _id }, { Chapter }) => {
+      const chapter = await Chapter.findOne({ _id });
+      return chapter;
+    },
+
     getCurrentUser: async (root, args, { currentUser, User }) => {
       if (!currentUser) {
         return null
