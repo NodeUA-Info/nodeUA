@@ -10,6 +10,7 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import SignOut from "../Auth/SignOut";
 import logo from "../../assets/logo.png";
 import "./Navigation.css";
 
@@ -77,9 +78,7 @@ const NavbarAuth = () => (
     </NavItem>
     <NavItem>
       <NavLink tag={RRNavLink} to="/signout" className="nav_link">
-        <span>
-          Вийти <FontAwesomeIcon icon="sign-out-alt" />
-        </span>
+        <SignOut />
       </NavLink>
     </NavItem>
   </Nav>

@@ -8,7 +8,9 @@ import "./styles/ChapterList.css";
 const ChapterList = () => {
   return (
     <Query query={GET_CHAPTERS}>
-      {({ loading, data }) => {
+      {({ loading, data, error }) => {
+        if (loading) return <div>Loading</div>;
+        if (error) return <div>Error</div>;
         console.log(data);
         if (!loading && data.getChapters.length > 0) {
           return data.getChapters.map(chapter => {
