@@ -13,6 +13,7 @@ const chapter = gql`
   #4 Define the query type that must respond to 'chapters' query
   extend type Query {
     getChapters: [Chapter]
+    getChapter(_id: ID!): Chapter
   }
 
   
