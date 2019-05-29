@@ -13,7 +13,6 @@
 
 .form_group {
   border: 1px solid rgb(214, 214, 214);
-  /* border-radius: 2%; */
   padding-bottom: 20px;
   background-color: whitesmoke;
 }
@@ -29,6 +28,7 @@
   width: 87%;
   color: #6de069;
 }
+
 .form_title {
   margin-bottom: 10px;
   padding: 10px;

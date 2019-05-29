@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink as RRNavLink, Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Collapse,
   Navbar,
@@ -23,6 +24,7 @@ class Navigation extends Component {
     });
   };
   render() {
+    const { session } = this.props;
     return (
       <div className="main_nav">
         <div className="nav_container">
@@ -32,7 +34,11 @@ class Navigation extends Component {
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
-              <NavbarUnAuth />
+              {session && session.getCurrentUser ? (
+                <NavbarAuth />
+              ) : (
+                <NavbarUnAuth />
+              )}
             </Collapse>
           </Navbar>
         </div>
@@ -45,12 +51,35 @@ const NavbarUnAuth = () => (
   <Nav className="ml-auto" navbar>
     <NavItem>
       <NavLink tag={RRNavLink} to="/signin" className="nav_link">
-        Вхід
+        <span>
+          Вхід <FontAwesomeIcon icon="sign-in-alt" />
+        </span>
       </NavLink>
     </NavItem>
     <NavItem>
       <NavLink tag={RRNavLink} to="/signup" className="nav_link">
-        Реєстрація
+        <span>
+          Реєстрація <FontAwesomeIcon icon="user-plus" />
+        </span>
+      </NavLink>
+    </NavItem>
+  </Nav>
+);
+
+const NavbarAuth = () => (
+  <Nav className="ml-auto" navbar>
+    <NavItem>
+      <NavLink tag={RRNavLink} to="/profile" className="nav_link">
+        <span>
+          Профіль <FontAwesomeIcon icon="user" />
+        </span>
+      </NavLink>
+    </NavItem>
+    <NavItem>
+      <NavLink tag={RRNavLink} to="/signout" className="nav_link">
+        <span>
+          Вийти <FontAwesomeIcon icon="sign-out-alt" />
+        </span>
       </NavLink>
     </NavItem>
   </Nav>

@@ -13,16 +13,28 @@ import App from "./components/App";
 import Navigation from "./components/Navigation/Navigation";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
+import Profile from "./components/Profile/Profile";
 import withSession from "./components/withSession";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Root = ({ refetch }) => (
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faSignInAlt,
+  faSignOutAlt,
+  faUser,
+  faUserPlus
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faSignInAlt, faSignOutAlt, faUser, faUserPlus);
+
+const Root = ({ refetch, session }) => (
   <Router>
     <Fragment>
-      <Navigation />
+      <Navigation session={session} />
       <Switch>
         <Route path="/" exact component={App} />
+        <Route path="/profile" exact component={Profile} />
         <Route path="/signin" render={() => <SignIn refetch={refetch} />} />
         <Route path="/signup" render={() => <SignUp refetch={refetch} />} />
         <Redirect to="/" />
