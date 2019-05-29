@@ -1,7 +1,8 @@
 import React from "react";
-import { Card, CardTitle, CardBody } from "reactstrap";
 import { Query } from "react-apollo";
 import { GET_CHAPTERS } from "../../queries";
+import Chapter from "./Chapter";
+import { ListGroup } from "reactstrap";
 
 import "./styles/ChapterList.css";
 
@@ -13,14 +14,13 @@ const ChapterList = () => {
         if (error) return <div>Error</div>;
         console.log(data);
         if (!loading && data.getChapters.length > 0) {
-          return data.getChapters.map(chapter => {
-            return (
-              <Card key={chapter._id} body outline className="chapter-card">
-                <CardTitle>{chapter.title}</CardTitle>
-                <CardBody>{chapter.content}</CardBody>
-              </Card>
-            );
-          });
+          return (
+            <ListGroup>
+              {data.getChapters.map(chapter => (
+                <Chapter key={chapter._id} {...chapter} />
+              ))}
+            </ListGroup>
+          );
         } else {
           return (
             <div>
