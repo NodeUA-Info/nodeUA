@@ -45,7 +45,8 @@ const resolvers = {
       const newUser = await new User({
         username,
         email,
-        password
+        password,
+        roles: ['user']
       }).save();
       return { token: createToken(newUser, process.env.SECRET, '24hr') }
     },
