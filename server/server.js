@@ -4,17 +4,18 @@ require("dotenv").config({ path: "variables.env" });
 const { ApolloServer } = require("apollo-server-express");
 const jwt = require('jsonwebtoken');
 
-// #2 Import mongoose
+// #2 Import mongoose schemas
 const mongoose = require("./config/database");
 const Chapter = require('./models/Chapter');
 const User = require('./models/User');
+const Test = require('./models/Test');
 
 
 // #3 Import GraphQL type definitions
 const typeDefs = require("./typeDefs");
 
 // #4 Import GraphQL resolvers
-const resolvers = require("./resolvers/resolvers");
+const resolvers = require("./resolvers");
 
 
 // #5 Initialize an Apollo server
@@ -24,7 +25,7 @@ const server = new ApolloServer({
   context: ({ req: { currentUser } }) => {
     // const token = req.headers.authorization;
     // const currentUser = getUser(token);
-    return { Chapter, User, currentUser }
+    return { Chapter, User, Test, currentUser }
   }
 });
 
