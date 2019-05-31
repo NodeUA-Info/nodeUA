@@ -25,6 +25,11 @@ const resolvers = {
       }
       const user = await User.findOne({ username: currentUser.username });
       return user;
+    },
+
+    getTests: async (root, args, { Test }) => {
+      const allTests = await Test.find();
+      return allTests;
     }
   },
 
@@ -60,6 +65,11 @@ const resolvers = {
         throw new Error('Invalid password');
       }
       return { token: createToken(user, process.env.SECRET, '24hr') }
+    },
+
+    addTest: async (root, { questions }, { Test }) => {
+      const newTest = await new Test({ questions }).save();
+      return newTest;
     }
   }
 };
