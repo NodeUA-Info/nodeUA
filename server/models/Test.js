@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AnswerSchema = new Schema({
-  text: {
+  answerText: {
     type: String,
     required: true
   },
@@ -13,7 +13,7 @@ const AnswerSchema = new Schema({
 });
 
 const QuestionSchema = new Schema({
-  text: {
+  questionText: {
     type: String,
     required: true
   },

@@ -3,25 +3,38 @@ const { gql } = require('apollo-server-express');
 const test = gql`
   type Answer {
     _id: ID
-    text: String!
+    answerText: String!
+    isValid: Boolean!
+  }
+
+  input AnswerInput {
+    answerText: String!
     isValid: Boolean!
   }
 
   type Question {
     _id: ID
-    text: String!
-    answers: [Answer]
+    questionText: String!
+    answers: [Answer]!
+  }
+
+  input QuestionInput {
+    questionText: String!
+    answers: [AnswerInput]!
   }
 
   type Test {
     _id: ID
-    questions: [Question]
+    questions: [Question]!
   }
 
   extend type Query {
-    getTest: Test
+    getTests: [Test]
   }
 
+  extend type Mutation {
+    addTest(questions: [QuestionInput]!): Test
+  }
 `;
 
 module.exports = test;

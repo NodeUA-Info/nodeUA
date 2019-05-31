@@ -3,6 +3,6 @@ const chapter = require('./chapter');
 const user = require('./user');
 const test = require('./test')
 
-const schemaArray = [queryRoot, chapter, user];
+const schemaArray = [queryRoot, chapter, user, test];
 
 module.exports = schemaArray;
