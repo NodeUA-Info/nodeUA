@@ -15,6 +15,7 @@ import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
 import Profile from "./components/Profile/Profile";
 import ChapterPage from "./components/Chapters/ChapterPage";
+import AddTest from "./components/Tests/AddTest";
 import withSession from "./components/withSession";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -38,6 +39,7 @@ const Root = ({ refetch, session }) => (
         <Route path="/signin" render={() => <SignIn refetch={refetch} />} />
         <Route path="/signup" render={() => <SignUp refetch={refetch} />} />
         <Route path="/profile" component={Profile} />
+        <Route path="/test/add" component={AddTest} />
         <Route path="/chapters/:_id" component={ChapterPage} />
         <Redirect to="/" />
       </Switch>

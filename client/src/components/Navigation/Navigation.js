@@ -70,6 +70,11 @@ const NavbarUnAuth = () => (
 const NavbarAuth = () => (
   <Nav className="ml-auto" navbar>
     <NavItem>
+      <NavLink tag={RRNavLink} to="/test/add" className="nav_link">
+        <span>+Тест</span>
+      </NavLink>
+    </NavItem>
+    <NavItem>
       <NavLink tag={RRNavLink} to="/profile" className="nav_link">
         <span>
           Профіль <FontAwesomeIcon icon="user" />
