@@ -46,7 +46,6 @@ class AddTest extends Component {
     // console.log(newState);
     questions.push(newState);
     // console.log(questions);
-
     this.clearState();
   };
 

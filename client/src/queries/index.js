@@ -71,3 +71,22 @@ export const ADD_TEST = gql`
     }
   }
 `;
+
+// Tests Queries
+
+export const GET_TESTS = gql`
+  query {
+    getTests {
+      _id
+      questions {
+        _id
+        questionText
+        answers {
+          _id
+          answerText
+          isValid
+        }
+      }
+    }
+  }
+`;
