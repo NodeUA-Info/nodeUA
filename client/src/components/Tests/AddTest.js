@@ -19,9 +19,9 @@ const initialState = {
 class AddTest extends Component {
   state = { ...initialState };
 
-  // clearState = () => {
-  //   this.setState({ ...initialState });
-  // };
+  clearState = () => {
+    this.setState({ ...initialState });
+  };
 
   handleQuestionChange = event => {
     const { name, value } = event.target;
@@ -30,19 +30,24 @@ class AddTest extends Component {
     });
   };
 
-  handleAnswersChange = e => {
+  handleAnswerChange = e => {
     const { name, value } = e.target;
     const index = e.target.getAttribute("data-index");
+    const { answers } = this.state;
 
-    const newAnswersArr = [...this.state.answers];
+    const newAnswersArr = JSON.parse(JSON.stringify(answers));
+    // console.log(newAnswersArr);
     newAnswersArr[index][name] = value;
     this.setState({ answers: newAnswersArr });
   };
 
   addQuestion = () => {
-    questions.push(this.state);
-    console.log(questions);
-    // this.clearState();
+    const newState = Object.assign({}, this.state);
+    // console.log(newState);
+    questions.push(newState);
+    // console.log(questions);
+
+    this.clearState();
   };
 
   handleSubmit = (e, addTest) => {
@@ -82,7 +87,7 @@ class AddTest extends Component {
                     name="answerText"
                     placeholder="Перший варіант"
                     data-index={0}
-                    onChange={this.handleAnswersChange}
+                    onChange={this.handleAnswerChange}
                     value={answers[0].answerText}
                   />
                   <Input
@@ -90,7 +95,7 @@ class AddTest extends Component {
                     name="answerText"
                     data-index={1}
                     placeholder="Другий варіант"
-                    onChange={this.handleAnswersChange}
+                    onChange={this.handleAnswerChange}
                     value={answers[1].answerText}
                   />
                   <Input
@@ -98,7 +103,7 @@ class AddTest extends Component {
                     name="answerText"
                     data-index={2}
                     placeholder="Третій варіант"
-                    onChange={this.handleAnswersChange}
+                    onChange={this.handleAnswerChange}
                     value={answers[2].answerText}
                   />
                   <Label for="answer4">Правильна відповідь</Label>
@@ -107,7 +112,7 @@ class AddTest extends Component {
                     name="answerText"
                     data-index={3}
                     placeholder="Четвертий варіант"
-                    onChange={this.handleAnswersChange}
+                    onChange={this.handleAnswerChange}
                     value={answers[3].answerText}
                   />
                 </FormGroup>
