@@ -52,3 +52,22 @@ export const SIGNUP_USER = gql`
     }
   }
 `;
+
+/* Tests Mutations */
+
+export const ADD_TEST = gql`
+  mutation($questions: [QuestionInput]!) {
+    addTest(questions: $questions) {
+      _id
+      questions {
+        _id
+        questionText
+        answers {
+          _id
+          answerText
+          isValid
+        }
+      }
+    }
+  }
+`;
