@@ -25,15 +25,17 @@ const test = gql`
 
   type Test {
     _id: ID
+    title: String!
     questions: [Question]!
   }
 
   extend type Query {
     getTests: [Test]
+    getTest(_id: ID!): Test
   }
 
   extend type Mutation {
-    addTest(questions: [QuestionInput]!): Test
+    addTest(questions: [QuestionInput]!, title: String!): Test
   }
 `;
 
