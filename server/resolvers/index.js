@@ -30,6 +30,11 @@ const resolvers = {
     getTests: async (root, args, { Test }) => {
       const allTests = await Test.find();
       return allTests;
+    },
+
+    getTest: async (root, { _id }, {Test}) => {
+      const test = await Test.findOne({ _id });
+      return test;
     }
   },
 
@@ -67,8 +72,8 @@ const resolvers = {
       return { token: createToken(user, process.env.SECRET, '24hr') }
     },
 
-    addTest: async (root, { questions }, { Test }) => {
-      const newTest = await new Test({ questions }).save();
+    addTest: async (root, { questions, title }, { Test }) => {
+      const newTest = await new Test({ title, questions }).save();
       return newTest;
     }
   }
