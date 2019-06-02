@@ -27,7 +27,7 @@ class AddTest extends Component {
   handleTitleChange = event => {
     const { value } = event.target;
     title = value;
-    console.log(title);
+    // console.log(title);
   };
 
   handleQuestionChange = event => {
