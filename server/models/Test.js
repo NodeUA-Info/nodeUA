@@ -21,6 +21,10 @@ const QuestionSchema = new Schema({
 });
 
 const TestSchema = new Schema({
+  title: {
+    type: String,
+    required: true
+  },
   questions: [QuestionSchema]
 });
 
