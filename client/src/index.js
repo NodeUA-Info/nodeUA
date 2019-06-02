@@ -17,6 +17,7 @@ import Profile from "./components/Profile/Profile";
 import ChapterPage from "./components/Chapters/ChapterPage";
 import AddTest from "./components/Tests/AddTest";
 import TestPage from "./components/Tests/TestPage";
+import TestList from "./components/Tests/TestList";
 import withSession from "./components/withSession";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -42,7 +43,8 @@ const Root = ({ refetch, session }) => (
         <Route path="/profile" component={Profile} />
         <Route path="/test/add" component={AddTest} />
         <Route path="/chapters/:_id" component={ChapterPage} />
-        <Route path="/tests" component={TestPage} />
+        <Route path="/tests" component={TestList} />
+        <Route path="/test/:_id" component={TestPage} />
         <Redirect to="/" />
       </Switch>
     </Fragment>

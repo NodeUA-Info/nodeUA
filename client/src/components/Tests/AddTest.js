@@ -5,6 +5,7 @@ import { ADD_TEST } from "../../queries";
 import Error from "../Error";
 
 const questions = [];
+let title = "";
 
 const initialState = {
   questionText: "",
@@ -21,6 +22,12 @@ class AddTest extends Component {
 
   clearState = () => {
     this.setState({ ...initialState });
+  };
+
+  handleTitleChange = event => {
+    const { value } = event.target;
+    title = value;
+    console.log(title);
   };
 
   handleQuestionChange = event => {
@@ -60,7 +67,7 @@ class AddTest extends Component {
     const { questionText, answers } = this.state;
     // console.log(answers[1].answer2);
     return (
-      <Mutation mutation={ADD_TEST} variables={{ questions }}>
+      <Mutation mutation={ADD_TEST} variables={{ questions, title }}>
         {(addTest, { data, loading, error }) => {
           // console.log(data);
           return (
@@ -70,6 +77,14 @@ class AddTest extends Component {
                 className="form"
                 onSubmit={e => this.handleSubmit(e, addTest)}
               >
+                <FormGroup>
+                  <Label for="title">Назва тесту</Label>
+                  <Input
+                    type="text"
+                    name="title"
+                    onChange={this.handleTitleChange}
+                  />
+                </FormGroup>
                 <FormGroup>
                   <Label for="exampleText">Питання</Label>
                   <Input

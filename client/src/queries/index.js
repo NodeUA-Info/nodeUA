@@ -56,9 +56,10 @@ export const SIGNUP_USER = gql`
 /* Tests Mutations */
 
 export const ADD_TEST = gql`
-  mutation($questions: [QuestionInput]!) {
-    addTest(questions: $questions) {
+  mutation($questions: [QuestionInput]!, $title: String!) {
+    addTest(questions: $questions, title: $title) {
       _id
+      title
       questions {
         _id
         questionText
@@ -78,6 +79,16 @@ export const GET_TESTS = gql`
   query {
     getTests {
       _id
+      title
+    }
+  }
+`;
+
+export const GET_TEST = gql`
+  query($_id: ID!) {
+    getTest(_id: $_id) {
+      _id
+      title
       questions {
         _id
         questionText
