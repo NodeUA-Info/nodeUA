@@ -5,11 +5,13 @@ const test = gql`
     _id: ID
     answerText: String!
     isValid: Boolean!
+    isChecked: Boolean!
   }
 
   input AnswerInput {
     answerText: String!
     isValid: Boolean!
+    isChecked: Boolean!
   }
 
   type Question {
@@ -29,6 +31,11 @@ const test = gql`
     questions: [Question]!
   }
 
+
+  type checkTestPayload {
+    results: [Boolean]
+  }
+
   extend type Query {
     getTests: [Test]
     getTest(_id: ID!): Test
@@ -36,6 +43,7 @@ const test = gql`
 
   extend type Mutation {
     addTest(questions: [QuestionInput]!, title: String!): Test
+    checkTest(_id: ID!, questions: [QuestionInput]!): checkTestPayload
   }
 `;
 
