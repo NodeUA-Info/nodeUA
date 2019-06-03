@@ -9,6 +9,11 @@ const AnswerSchema = new Schema({
   isValid: {
     type: Boolean,
     required: true
+  },
+  isChecked: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 

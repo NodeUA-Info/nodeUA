@@ -32,7 +32,7 @@ const resolvers = {
       return allTests;
     },
 
-    getTest: async (root, { _id }, {Test}) => {
+    getTest: async (root, { _id }, { Test }) => {
       const test = await Test.findOne({ _id });
       return test;
     }
@@ -55,7 +55,8 @@ const resolvers = {
       const newUser = await new User({
         username,
         email,
-        password
+        password,
+        roles: ['user']
       }).save();
       return { token: createToken(newUser, process.env.SECRET, '24hr') }
     },
@@ -75,6 +76,28 @@ const resolvers = {
     addTest: async (root, { questions, title }, { Test }) => {
       const newTest = await new Test({ title, questions }).save();
       return newTest;
+    },
+
+    checkTest: async (root, { _id, questions }, { User }) => {
+      const user = await User.findOne({ _id: _id });
+      if (!user) {
+        throw new Error('User not found');
+      }
+      const results = [];
+      questions.map(question => {
+        question.answers.map(answer => {
+          if (answer.isValid) {
+            if (answer.isChecked) {
+              return results.push(true);
+            } else {
+              return results.push(false);
+            }
+          }
+        })
+      });
+      console.log(results);
+      // TODO: write results to User
+      return { results };
     }
   }
 };

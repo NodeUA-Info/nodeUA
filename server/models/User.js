@@ -25,6 +25,10 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+
+  roles: {
+    type: [String]
+  }
 });
 
 UserSchema.pre('save', function(next) {
