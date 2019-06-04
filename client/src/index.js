@@ -40,11 +40,14 @@ const Root = ({ refetch, session }) => (
         <Route path="/" exact component={App} />
         <Route path="/signin" render={() => <SignIn refetch={refetch} />} />
         <Route path="/signup" render={() => <SignUp refetch={refetch} />} />
+        <Route path="/test/add" render={() => <AddTest refetch={refetch} />} />
         <Route path="/profile" component={Profile} />
-        <Route path="/test/add" component={AddTest} />
         <Route path="/chapters/:_id" component={ChapterPage} />
         <Route path="/tests" component={TestList} />
-        <Route path="/test/:_id" component={TestPage} />
+        <Route
+          path="/test/:_id"
+          render={() => <TestPage session={session} />}
+        />
         <Redirect to="/" />
       </Switch>
     </Fragment>

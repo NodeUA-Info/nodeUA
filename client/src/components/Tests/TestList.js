@@ -2,7 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import { GET_TESTS } from "../../queries";
 import Test from "./Test";
-import { ListGroup } from "reactstrap";
+import { Container, ListGroup } from "reactstrap";
 
 const TestList = () => {
   return (
@@ -13,11 +13,13 @@ const TestList = () => {
         console.log(data);
         if (!loading && data.getTests.length > 0) {
           return (
-            <ListGroup>
-              {data.getTests.map(test => (
-                <Test key={test._id} {...test} />
-              ))}
-            </ListGroup>
+            <Container>
+              <ListGroup>
+                {data.getTests.map(test => (
+                  <Test key={test._id} {...test} />
+                ))}
+              </ListGroup>
+            </Container>
           );
         } else {
           return (

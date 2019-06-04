@@ -28,8 +28,8 @@ export const GET_CHAPTER = gql`
 export const GET_CURRENT_USER = gql`
   query {
     getCurrentUser {
+      _id
       username
-      joinDate
       email
     }
   }
@@ -67,6 +67,7 @@ export const ADD_TEST = gql`
           _id
           answerText
           isValid
+          isChecked
         }
       }
     }
@@ -96,6 +97,7 @@ export const GET_TEST = gql`
           _id
           answerText
           isValid
+          isChecked
         }
       }
     }

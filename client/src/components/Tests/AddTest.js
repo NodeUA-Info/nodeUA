@@ -1,19 +1,21 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { withRouter } from "react-router-dom";
+import { Container, Button, Form, FormGroup, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
 import { ADD_TEST } from "../../queries";
 import Error from "../Error";
 
 const questions = [];
 let title = "";
+let counter = 0;
 
 const initialState = {
   questionText: "",
   answers: [
-    { answerText: "", isValid: false },
-    { answerText: "", isValid: false },
-    { answerText: "", isValid: false },
-    { answerText: "", isValid: true }
+    { answerText: "", isValid: false, isChecked: false },
+    { answerText: "", isValid: false, isChecked: false },
+    { answerText: "", isValid: false, isChecked: false },
+    { answerText: "", isValid: true, isChecked: false }
   ]
 };
 
@@ -53,6 +55,7 @@ class AddTest extends Component {
     // console.log(newState);
     questions.push(newState);
     // console.log(questions);
+    counter = questions.length;
     this.clearState();
   };
 
@@ -61,6 +64,7 @@ class AddTest extends Component {
     addTest().then(({ data }) => {
       console.log(data);
     });
+    this.props.history.push("/tests");
   };
 
   render() {
@@ -72,70 +76,82 @@ class AddTest extends Component {
           // console.log(data);
           return (
             <div className="App">
-              <h2 className="App">Додати тест</h2>
-              <Form
-                className="form"
-                onSubmit={e => this.handleSubmit(e, addTest)}
-              >
-                <FormGroup>
-                  <Label for="title">Назва тесту</Label>
-                  <Input
-                    type="text"
-                    name="title"
-                    onChange={this.handleTitleChange}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="exampleText">Питання</Label>
-                  <Input
-                    type="textarea"
-                    name="questionText"
-                    onChange={this.handleQuestionChange}
-                    value={questionText}
-                  />
-                </FormGroup>
-                <h2>Варіанти відповідей</h2>
-                <FormGroup>
-                  <Input
-                    type="text"
-                    name="answerText"
-                    placeholder="Перший варіант"
-                    data-index={0}
-                    onChange={this.handleAnswerChange}
-                    value={answers[0].answerText}
-                  />
-                  <Input
-                    type="text"
-                    name="answerText"
-                    data-index={1}
-                    placeholder="Другий варіант"
-                    onChange={this.handleAnswerChange}
-                    value={answers[1].answerText}
-                  />
-                  <Input
-                    type="text"
-                    name="answerText"
-                    data-index={2}
-                    placeholder="Третій варіант"
-                    onChange={this.handleAnswerChange}
-                    value={answers[2].answerText}
-                  />
-                  <Label for="answer4">Правильна відповідь</Label>
-                  <Input
-                    type="text"
-                    name="answerText"
-                    data-index={3}
-                    placeholder="Четвертий варіант"
-                    onChange={this.handleAnswerChange}
-                    value={answers[3].answerText}
-                  />
-                </FormGroup>
-                <Button onClick={this.addQuestion}>+</Button>
-                <Button disabled={loading} type="submit">
-                  Сформувати
-                </Button>
-                {error && <Error error={error} />}
-              </Form>
+              <h2 className="form_title">Додати тест</h2>
+              <Container className="form_container_test">
+                <Form
+                  className="form_test"
+                  onSubmit={e => this.handleSubmit(e, addTest)}
+                >
+                  <FormGroup>
+                    <h4 className="test_title">Назва тесту</h4>
+                    <Input
+                      type="text"
+                      name="title"
+                      onChange={this.handleTitleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <h4 className="test_title">Питання</h4>
+                    <Input
+                      type="textarea"
+                      name="questionText"
+                      onChange={this.handleQuestionChange}
+                      value={questionText}
+                    />
+                  </FormGroup>
+                  <h4 className="test_title">Варіанти відповідей</h4>
+                  <FormGroup>
+                    <Input
+                      className="answer_input"
+                      type="text"
+                      name="answerText"
+                      placeholder="Перший варіант"
+                      data-index={0}
+                      onChange={this.handleAnswerChange}
+                      value={answers[0].answerText}
+                    />
+                    <Input
+                      className="answer_input"
+                      type="text"
+                      name="answerText"
+                      data-index={1}
+                      placeholder="Другий варіант"
+                      onChange={this.handleAnswerChange}
+                      value={answers[1].answerText}
+                    />
+                    <Input
+                      className="answer_input"
+                      type="text"
+                      name="answerText"
+                      data-index={2}
+                      placeholder="Третій варіант"
+                      onChange={this.handleAnswerChange}
+                      value={answers[2].answerText}
+                    />
+                    <h4 className="test_title">Правильна відповідь</h4>
+                    <Input
+                      className="answer_input"
+                      type="text"
+                      name="answerText"
+                      data-index={3}
+                      placeholder="Правильний варіант"
+                      onChange={this.handleAnswerChange}
+                      value={answers[3].answerText}
+                    />
+                  </FormGroup>
+                  <div className="question_counter">
+                    Всього питань: {counter}
+                  </div>
+                  <Button onClick={this.addQuestion} className="test_btn">
+                    + Питання
+                  </Button>
+                  <br />
+                  <Button disabled={loading} type="submit" className="test_btn">
+                    Сформувати
+                  </Button>
+                  {error && <Error error={error} />}
+                </Form>
+              </Container>
             </div>
           );
         }}
@@ -144,4 +160,4 @@ class AddTest extends Component {
   }
 }
 
-export default AddTest;
+export default withRouter(AddTest);
