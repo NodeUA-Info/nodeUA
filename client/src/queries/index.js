@@ -74,6 +74,14 @@ export const ADD_TEST = gql`
   }
 `;
 
+export const CHECK_TEST = gql`
+  mutation($_id: ID!, $questions: [QuestionInput]!) {
+    checkTest(_id: $_id, questions: $questions) {
+      results
+    }
+  }
+`;
+
 // Tests Queries
 
 export const GET_TESTS = gql`

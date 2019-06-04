@@ -70,6 +70,7 @@ class AddTest extends Component {
   render() {
     const { questionText, answers } = this.state;
     // console.log(answers[1].answer2);
+    console.log(questions);
     return (
       <Mutation mutation={ADD_TEST} variables={{ questions, title }}>
         {(addTest, { data, loading, error }) => {
