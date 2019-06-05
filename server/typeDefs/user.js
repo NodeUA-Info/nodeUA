@@ -1,7 +1,11 @@
 const { gql } = require('apollo-server-express');
 
 const user = gql`
-  
+  type TestResult {
+    _id: ID
+    testName: String
+    results: [Boolean]
+  }
 
   type User {
     _id: ID
@@ -10,6 +14,7 @@ const user = gql`
     email: String!
     joinDate: String
     roles: [String]
+    testResults: [TestResult]
   }
 
   type Token {

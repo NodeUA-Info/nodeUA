@@ -56,7 +56,8 @@ const resolvers = {
         username,
         email,
         password,
-        roles: ['user']
+        roles: ['user'],
+        testResults: []
       }).save();
       return { token: createToken(newUser, process.env.SECRET, '24hr') }
     },
@@ -78,11 +79,7 @@ const resolvers = {
       return newTest;
     },
 
-    checkTest: async (root, { _id, questions }, { User }) => {
-      const user = await User.findOne({ _id: _id });
-      if (!user) {
-        throw new Error('User not found');
-      }
+    checkTest: async (root, { _id, title, questions }, { User }) => {
       const results = [];
       questions.map(question => {
         question.answers.map(answer => {
@@ -96,7 +93,54 @@ const resolvers = {
         })
       });
       console.log(results);
-      // TODO: write results to User
+      // TODO: add results of test to User
+
+
+      const user = await User.findOne({ _id });
+
+      console.log("user before update:", user);
+
+      const { testResults } = user;
+
+      let isNewResult = true;
+
+      console.log("==============");
+      let id;
+      if (testResults.length === 0) {
+        isNewResult = true;
+      } else {
+        testResults.map(testResult => {
+          console.log("testResult.testName: ", testResult.testName);
+          console.log("title: ", title)
+          if (testResult.testName === title) {
+            isNewResult = false;
+            id = testResult._id;
+          }
+        });
+      }
+
+      console.log("isNewResult: ", isNewResult);
+      console.log("==============");
+
+      let testResult = {
+        "results": results,
+        "testName": title
+      };;
+
+      if (isNewResult) {
+        const updatedUser = await User.findByIdAndUpdate({ _id }, { "$addToSet": { "testResults": testResult } }, { "new": true }, function (err) {
+          if (err) throw new Error(err)
+          console.log("Successfully saved!");
+        });
+        console.log("user after update(isNewResult=true):", updatedUser);
+      } else if (!isNewResult) {
+        const updatedUser = await User.findOneAndUpdate({ 'testResults._id': id }, { '$set': { 'testResults.$.results': results } }, { "new": true }, function (err) {
+          if (err) throw new Error(err)
+          console.log("Successfully saved!");
+        });
+        console.log("user after update(isNewResult=false):", updatedUser);
+      }
+
       return { results };
     }
   }
