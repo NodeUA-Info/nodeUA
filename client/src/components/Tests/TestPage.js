@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Query, Mutation } from "react-apollo";
 import { GET_TEST } from "../../queries";
 import { CHECK_TEST } from "../../queries";
-import Error from "../Error";
+import Result from "./Result";
 
 import {
   ListGroup,
@@ -17,39 +17,52 @@ import {
 
 const newQuestions = [];
 let id = "";
+let newScore = 0;
 
 class TestPage extends Component {
   state = {
-    index: 0
+    index: 0,
+    score: 0
   };
 
-  // shuffleArray = array => {
-  //   for (let i = array.length - 1; i > 0; i--) {
-  //     const j = Math.floor(Math.random() * (i + 1));
-  //     [array[i], array[j]] = [array[j], array[i]];
-  //   }
-  // };
+  shuffleArray = array => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  };
 
   goToNext = (e, question, questions, checkTest) => {
     e.preventDefault();
     const { index } = this.state;
     newQuestions.push(question);
-    // console.log(newQuestions);
     this.setState({ index: index + 1 });
 
     if (index === questions.length - 1) {
       checkTest().then(({ data }) => {
-        console.log(data);
+        data.checkTest.results.map(result => {
+          if (result === true) {
+            newScore += 1;
+          }
+          this.setState({ score: newScore });
+          return newScore;
+        });
+        newQuestions.length = 0;
+        newScore = 0;
       });
-      // newQuestions.length = 0;
+      // this.props.history.push("/result");
     }
   };
 
+  handleRadioChange = answers => {
+    answers.map(answer => (answer.isChecked = false));
+    // console.log("group change", answers);
+  };
+
   // do it right!
-  handleChange = (e, answer) => {
-    // const { checked } = e.target;
+  handleChange = (e, answer, answers) => {
+    this.handleRadioChange(answers);
     answer.isChecked = !answer.isChecked;
-    // console.log(answer.isChecked);
   };
 
   render() {
@@ -66,6 +79,7 @@ class TestPage extends Component {
           // console.log(data.getTest.questions);
           const { title, questions } = data.getTest;
           // const question = questions[index];
+
           const modifiedQuestions = [];
           questions.map(question => {
             const { answers: prevAnswers, questionText } = question;
@@ -74,41 +88,47 @@ class TestPage extends Component {
               const { answerText, isValid, isChecked } = prevAnswer;
               const answer = { answerText, isValid, isChecked };
               answers.push(answer);
+              return answers;
             });
             const modifiedQuestion = { answers, questionText };
             modifiedQuestions.push(modifiedQuestion);
+            return modifiedQuestions;
           });
-          console.log("modified questions: ", modifiedQuestions);
+          // console.log("modified questions: ", modifiedQuestions);
 
           const question = modifiedQuestions[index];
-          console.log("question: ", question);
+          // console.log("question: ", question, typeof question);
+          let radioName = index;
 
-          if (index >= 0 && index < modifiedQuestions.length) {
-            return (
-              <div className="App">
-                <h2>{title}</h2>
-                <Mutation
-                  mutation={CHECK_TEST}
-                  variables={{ _id: id, questions: newQuestions }}
-                >
-                  {(checkTest, { loading, error }) => {
-                    console.log({ _id: id, questions: newQuestions });
-                    return (
+          return (
+            <Mutation
+              mutation={CHECK_TEST}
+              variables={{ _id: id, questions: newQuestions }}
+            >
+              {(checkTest, { loading, error }) => {
+                // console.log({ _id: id, questions: newQuestions });
+                if (index >= 0 && index < modifiedQuestions.length) {
+                  return (
+                    <div className="App">
+                      <h2>{title}</h2>
                       <div>
                         <h2>{question.questionText}</h2>
                         <ListGroup>
                           <FormGroup>
-                            {/* {this.shuffleArray(question.answers)} */}
+                            {this.shuffleArray(question.answers)}
                             {question.answers.map((answer, index) => {
-                              answer.isChecked = false;
                               return (
                                 <ListGroupItem key={index}>
                                   <Label check>
                                     <Input
                                       type="radio"
-                                      name="answer"
+                                      name={radioName}
                                       onChange={e =>
-                                        this.handleChange(e, answer)
+                                        this.handleChange(
+                                          e,
+                                          answer,
+                                          question.answers
+                                        )
                                       }
                                     />
                                     {answer.answerText}
@@ -131,16 +151,21 @@ class TestPage extends Component {
                         >
                           next
                         </Button>
-                        {error && <Error error={error} />}
                       </div>
-                    );
-                  }}
-                </Mutation>
-              </div>
-            );
-          } else {
-            return <h1>Results</h1>;
-          }
+                    </div>
+                  );
+                } else {
+                  const { score } = this.state;
+                  return (
+                    <div className="App">
+                      <h2>{title}</h2>
+                      <Result score={score} questionsCount={questions.length} />
+                    </div>
+                  );
+                }
+              }}
+            </Mutation>
+          );
         }}
       </Query>
     );
