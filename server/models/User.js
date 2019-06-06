@@ -3,31 +3,39 @@ const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 
-// #2 Instantiate a schema using mongoose Schema
+// Instantiate a schema using mongoose Schema
+const TestResultSchema = new Schema({
+  testName: {
+    type: String
+  },
+  results: {
+    type: [Boolean]
+  }
+})
+
 const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
     unique: true
   },
-
   password: {
     type: String,
     required: true
   },
-
   email: {
     type: String,
     required: true
   },
-
   joinDate: {
     type: Date,
     default: Date.now
   },
-
   roles: {
     type: [String]
+  },
+  testResults: {
+    type: [TestResultSchema],
   }
 });
 

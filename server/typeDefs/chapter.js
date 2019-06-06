@@ -8,7 +8,7 @@ const chapter = gql`
   type Chapter {
     _id: ID
     title: String
-    content: String
+    uri: String
   }
   #4 Define the query type that must respond to 'chapters' query
   extend type Query {
@@ -20,7 +20,7 @@ const chapter = gql`
 
   #5 Define a mutation to add new posts with two required fields
   extend type Mutation {
-    addChapter(title: String!, content: String!): Chapter
+    addChapter(title: String!, uri: String!): Chapter
   }
 `;
 
