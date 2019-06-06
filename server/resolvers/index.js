@@ -40,10 +40,10 @@ const resolvers = {
 
 
   Mutation: {
-    addChapter: async (root, { title, content }, { Chapter }) => {
+    addChapter: async (root, { title, uri }, { Chapter }) => {
       // Create a new record in the database
       // Save the record and return it
-      const newChapter = await new Chapter({ title: title, content: content }).save();
+      const newChapter = await new Chapter({ title: title, uri: uri }).save();
       return newChapter;
     },
 
@@ -93,8 +93,6 @@ const resolvers = {
         })
       });
       console.log(results);
-      // TODO: add results of test to User
-
 
       const user = await User.findOne({ _id });
 

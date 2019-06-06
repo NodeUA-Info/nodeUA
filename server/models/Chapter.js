@@ -8,7 +8,7 @@ const ChapterSchema = new Schema({
     type: String,
     required: true
   },
-  content: {
+  uri: {
     type: String,
     required: true
   }
