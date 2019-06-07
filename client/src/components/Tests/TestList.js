@@ -2,6 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import { GET_TESTS } from "../../queries";
 import Test from "./Test";
+import withAuth from "../withAuth";
 import { Container, ListGroup } from "reactstrap";
 
 const TestList = () => {
@@ -33,4 +34,4 @@ const TestList = () => {
   );
 };
 
-export default TestList;
+export default withAuth(session => session && session.getCurrentUser)(TestList);

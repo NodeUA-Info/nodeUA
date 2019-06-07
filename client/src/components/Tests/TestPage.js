@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
+import withAuth from "../withAuth";
 
 import { Query, Mutation } from "react-apollo";
 import { GET_TEST } from "../../queries";
@@ -172,4 +173,4 @@ class TestPage extends Component {
   }
 }
 
-export default withRouter(TestPage);
+export default withAuth(session => session && session.getCurrentUser)(TestPage);

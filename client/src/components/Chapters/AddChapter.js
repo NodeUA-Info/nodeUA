@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import withAuth from "../withAuth";
 import { Container, Button, Form, FormGroup, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
 import { ADD_CHAPTER, GET_CHAPTERS } from "../../queries";
@@ -91,4 +92,6 @@ class AddChapter extends Component {
   }
 }
 
-export default withRouter(AddChapter);
+export default withAuth(session => session && session.getCurrentUser)(
+  withRouter(AddChapter)
+);
