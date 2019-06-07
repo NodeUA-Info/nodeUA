@@ -12,7 +12,8 @@ const ChapterPage = ({ match }) => {
         if (loading) return <div>Loading</div>;
         if (error) return <div>Error</div>;
         console.log(data);
-        return <div>Chapter Page</div>;
+        const { uri, title } = data.getChapter;
+        return <iframe title={title} src={uri} className="iframe" />;
       }}
     </Query>
   );

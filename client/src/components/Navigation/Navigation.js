@@ -80,8 +80,8 @@ const NavbarAuth = () => (
       </NavLink>
     </NavItem>
     <NavItem>
-      <NavLink tag={RRNavLink} to="/test/add" className="nav_link">
-        <span>+Тест</span>
+      <NavLink tag={RRNavLink} to="/chapter/add" className="nav_link">
+        <span>+Статтю</span>
       </NavLink>
     </NavItem>
     <NavItem>

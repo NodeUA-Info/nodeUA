@@ -6,7 +6,6 @@ export const GET_CHAPTERS = gql`
     getChapters {
       _id
       title
-      content
     }
   }
 `;
@@ -16,12 +15,22 @@ export const GET_CHAPTER = gql`
     getChapter(_id: $_id) {
       _id
       title
-      content
+      uri
     }
   }
 `;
 
 /* Chapter Mutations */
+
+export const ADD_CHAPTER = gql`
+  mutation($title: String!, $uri: String!) {
+    addChapter(title: $title, uri: $uri) {
+      _id
+      title
+      uri
+    }
+  }
+`;
 
 /* User Queries */
 

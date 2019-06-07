@@ -15,6 +15,7 @@ import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
 import Profile from "./components/Profile/Profile";
 import ChapterPage from "./components/Chapters/ChapterPage";
+import AddChapter from "./components/Chapters/AddChapter";
 import AddTest from "./components/Tests/AddTest";
 import TestPage from "./components/Tests/TestPage";
 import TestList from "./components/Tests/TestList";
@@ -41,6 +42,10 @@ const Root = ({ refetch, session }) => (
         <Route path="/signin" render={() => <SignIn refetch={refetch} />} />
         <Route path="/signup" render={() => <SignUp refetch={refetch} />} />
         <Route path="/test/add" render={() => <AddTest refetch={refetch} />} />
+        <Route
+          path="/chapter/add"
+          render={() => <AddChapter refetch={refetch} />}
+        />
         <Route path="/profile" component={Profile} />
         <Route path="/chapters/:_id" component={ChapterPage} />
         <Route path="/tests" component={TestList} />
