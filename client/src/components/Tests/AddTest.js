@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Container, Button, Form, FormGroup, Input } from "reactstrap";
 import { Mutation } from "react-apollo";
-import { ADD_TEST } from "../../queries";
+import { ADD_TEST, GET_TESTS } from "../../queries";
 import Error from "../Error";
 
 const questions = [];
@@ -67,12 +67,27 @@ class AddTest extends Component {
     this.props.history.push("/tests");
   };
 
+  updateCache = (cache, { data: { addTest } }) => {
+    const { getTests } = cache.readQuery({ query: GET_TESTS });
+
+    cache.writeQuery({
+      query: GET_TESTS,
+      data: {
+        getTests: [addTest, ...getTests]
+      }
+    });
+  };
+
   render() {
     const { questionText, answers } = this.state;
     // console.log(answers[1].answer2);
     console.log(questions);
     return (
-      <Mutation mutation={ADD_TEST} variables={{ questions, title }}>
+      <Mutation
+        mutation={ADD_TEST}
+        variables={{ questions, title }}
+        update={this.updateCache}
+      >
         {(addTest, { data, loading, error }) => {
           // console.log(data);
           return (
