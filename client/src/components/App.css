@@ -70,3 +70,58 @@
   width: 100%;
   border: none;
 }
+
+/* */
+.test_container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.test_list__header {
+  text-align: center;
+  color: #464646;
+  margin: 40px;
+}
+
+.test_list__header > p {
+  font-size: 18px;
+}
+
+.list_group {
+  padding: 0;
+  background: #f7f6ea;
+  border-radius: 3px;
+}
+
+.test_link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  font-size: 13px;
+  padding: 20px 60px;
+  white-space: nowrap;
+  border-bottom: 1px solid #eae5d9;
+}
+
+.test_title {
+  margin: 0;
+  white-space: normal;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.delete-button {
+  color: rgba(121, 121, 121, 0.562);
+  font-size: 2em;
+}
+
+.delete-button:hover {
+  color: rgb(189, 40, 40);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}

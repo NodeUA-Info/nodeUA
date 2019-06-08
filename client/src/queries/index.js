@@ -38,8 +38,14 @@ export const GET_CURRENT_USER = gql`
   query {
     getCurrentUser {
       _id
+      roles
       username
       email
+      joinDate
+      testResults {
+        results
+        testName
+      }
     }
   }
 `;
@@ -83,9 +89,17 @@ export const ADD_TEST = gql`
   }
 `;
 
+export const DELETE_TEST = gql`
+  mutation($_id: ID!) {
+    deleteTest(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 export const CHECK_TEST = gql`
-  mutation($_id: ID!, $questions: [QuestionInput]!) {
-    checkTest(_id: $_id, questions: $questions) {
+  mutation($_id: ID!, $questions: [QuestionInput]!, $title: String!) {
+    checkTest(_id: $_id, questions: $questions, title: $title) {
       results
     }
   }
@@ -94,7 +108,7 @@ export const CHECK_TEST = gql`
 // Tests Queries
 
 export const GET_TESTS = gql`
-  query {
+  {
     getTests {
       _id
       title

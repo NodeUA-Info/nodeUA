@@ -28,10 +28,11 @@ import {
   faSignInAlt,
   faSignOutAlt,
   faUser,
-  faUserPlus
+  faUserPlus,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSignInAlt, faSignOutAlt, faUser, faUserPlus);
+library.add(faSignInAlt, faSignOutAlt, faUser, faUserPlus, faTimes);
 
 const Root = ({ refetch, session }) => (
   <Router>
@@ -48,7 +49,7 @@ const Root = ({ refetch, session }) => (
         />
         <Route path="/profile" component={Profile} />
         <Route path="/chapters/:_id" component={ChapterPage} />
-        <Route path="/tests" component={TestList} />
+        <Route path="/tests" render={() => <TestList session={session} />} />
         <Route
           path="/test/:_id"
           render={() => <TestPage session={session} />}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import withAuth from "../withAuth";
 
 import { Query, Mutation } from "react-apollo";
@@ -104,7 +104,7 @@ class TestPage extends Component {
           return (
             <Mutation
               mutation={CHECK_TEST}
-              variables={{ _id: id, questions: newQuestions }}
+              variables={{ _id: id, questions: newQuestions, title }}
             >
               {(checkTest, { loading, error }) => {
                 // console.log({ _id: id, questions: newQuestions });
@@ -173,4 +173,6 @@ class TestPage extends Component {
   }
 }
 
-export default withAuth(session => session && session.getCurrentUser)(TestPage);
+export default withAuth(session => session && session.getCurrentUser)(
+  withRouter(TestPage)
+);
