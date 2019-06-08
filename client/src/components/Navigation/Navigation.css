@@ -2,10 +2,11 @@
   display: flex;
   align-items: center;
   color: #333;
-  background-image: url(../../assets/test-bg.png);
-  background-size: 50%;
-  background-position: center;
-  background-color: #6de069;
+  /* background-image: url(../../assets/test-bg.png); */
+  /* background-size: 50%; */
+  /* background-position: center; */
+  background-color: #6cc24a;
+  font-size: 14px;
 }
 
 .nav_container {

@@ -15,11 +15,13 @@ const ChapterList = () => {
         console.log(data);
         if (!loading && data.getChapters.length > 0) {
           return (
-            <ListGroup>
-              {data.getChapters.map(chapter => (
-                <Chapter key={chapter._id} {...chapter} />
-              ))}
-            </ListGroup>
+            <div className="chapter_list__container">
+              <ol className="rectangle-list">
+                {data.getChapters.map(chapter => (
+                  <Chapter key={chapter._id} {...chapter} />
+                ))}
+              </ol>
+            </div>
           );
         } else {
           return (

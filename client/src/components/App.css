@@ -125,3 +125,103 @@
   max-width: 960px;
   margin: 0 auto;
 }
+
+/* Header */
+
+.header {
+  position: relative;
+  color: #fff;
+  background-image: linear-gradient(0deg, #5a5a5a 0, #6cc24a);
+  /* background-size: 100%; */
+  background-position: center;
+  text-align: center;
+  padding-top: 80px;
+  height: 300px;
+  margin-bottom: 50px;
+  color: rgb(90, 90, 90);
+}
+
+.header:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -16px;
+  border-bottom: 19px solid #fff;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+}
+
+.header_title {
+  color: rgb(54, 54, 54);
+}
+
+.header_sub {
+  padding-bottom: 50px;
+  margin: 50px auto 0;
+}
+
+.header_subtitle {
+  color: rgb(238, 238, 238);
+}
+
+.chapter_list__container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+ol {
+  counter-reset: li; /* Initiate a counter */
+  list-style: none; /* Remove default numbering */
+  *list-style: decimal; /* Keep using default numbering for IE6/7 */
+  font: 25px "trebuchet MS", "lucida sans";
+  padding: 0;
+  margin-bottom: 4em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.rectangle-list .a_link {
+  position: relative;
+  display: block;
+  padding: 0.4em 3em 0.4em 0.8em;
+  *padding: 0.4em;
+  margin: 0.5em 0 0.5em 2.5em;
+  background: #ddd;
+  color: #444;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+
+.rectangle-list .a_link:hover {
+  background: #eee;
+}
+
+.rectangle-list .a_link:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: -2.5em;
+  top: 50%;
+  margin-top: -1em;
+  background: #6cc24a;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.rectangle-list .a_link:after {
+  position: absolute;
+  content: "";
+  border: 0.5em solid transparent;
+  left: -1em;
+  top: 50%;
+  margin-top: -0.5em;
+  transition: all 0.3s ease-out;
+}
+
+.rectangle-list .a_link:hover:after {
+  left: -0.5em;
+  border-left-color: #6cc24a;
+}
