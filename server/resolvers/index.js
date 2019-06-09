@@ -143,10 +143,8 @@ const resolvers = {
 
     deleteTest: async (root, {_id}, {Test}) => {
       const deletedTest = await Test.findByIdAndDelete(_id);
-      console.log(deletedTest);
-      
-      const allTests = await Test.find();
-      return allTests;
+      // console.log(deletedTest);
+      return deletedTest;
     }
   }
 };

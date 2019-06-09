@@ -44,7 +44,7 @@ const test = gql`
   extend type Mutation {
     addTest(questions: [QuestionInput]!, title: String!): Test
     checkTest(_id: ID!, title: String, questions: [QuestionInput]!): checkTestPayload
-    deleteTest(_id: ID!): [Test]
+    deleteTest(_id: ID!): Test
   }
 `;
 
