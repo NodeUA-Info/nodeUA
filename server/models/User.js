@@ -10,6 +10,9 @@ const TestResultSchema = new Schema({
   },
   results: {
     type: [Boolean]
+  },
+  score: {
+    type: Number
   }
 })
 
@@ -31,8 +34,8 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  roles: {
-    type: [String]
+  role: {
+    type: String
   },
   testResults: {
     type: [TestResultSchema],

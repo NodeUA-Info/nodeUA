@@ -5,6 +5,7 @@ const user = gql`
     _id: ID
     testName: String
     results: [Boolean]
+    score: Float
   }
 
   type User {
@@ -13,7 +14,7 @@ const user = gql`
     password: String!
     email: String!
     joinDate: String
-    roles: [String]
+    role: String
     testResults: [TestResult]
   }
 
