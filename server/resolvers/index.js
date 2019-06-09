@@ -56,7 +56,7 @@ const resolvers = {
         username,
         email,
         password,
-        roles: ['user'],
+        role: 'user',
         testResults: []
       }).save();
       return { token: createToken(newUser, process.env.SECRET, '24hr') }

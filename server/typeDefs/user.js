@@ -13,7 +13,7 @@ const user = gql`
     password: String!
     email: String!
     joinDate: String
-    roles: [String]
+    role: String
     testResults: [TestResult]
   }
 
