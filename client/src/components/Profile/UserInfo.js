@@ -23,7 +23,7 @@ const UserInfo = ({ session }) => {
                 <tr key={index}>
                   <th scope="row">{index}</th>
                   <td>{result.testName}</td>
-                  <td>100%</td>
+                  <td>{result.score}%</td>
                 </tr>
               ))}
             </tbody>

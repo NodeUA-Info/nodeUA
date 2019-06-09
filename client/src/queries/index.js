@@ -45,6 +45,7 @@ export const GET_CURRENT_USER = gql`
       testResults {
         results
         testName
+        score
       }
     }
   }
