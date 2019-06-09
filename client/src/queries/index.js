@@ -38,7 +38,7 @@ export const GET_CURRENT_USER = gql`
   query {
     getCurrentUser {
       _id
-      roles
+      role
       username
       email
       joinDate

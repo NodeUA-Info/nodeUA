@@ -175,6 +175,6 @@ class AddTest extends Component {
   }
 }
 
-export default withAuth(session => session && session.getCurrentUser)(
-  withRouter(AddTest)
-);
+export default withAuth(
+  session => session && session.getCurrentUser.role === "admin"
+)(withRouter(AddTest));

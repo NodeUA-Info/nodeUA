@@ -25,43 +25,36 @@ const Test = ({ _id, title, session }) => (
       </Link>
     </div>
     <div>
-      {session.getCurrentUser.roles.map(role => {
-        if (role === "admin") {
-          return (
-            <Mutation
-              mutation={DELETE_TEST}
-              variables={{ _id }}
-              key={_id}
-              update={(cache, { data: { deleteTest } }) => {
-                const { getTests } = cache.readQuery({
-                  query: GET_TESTS
-                });
+      {session.getCurrentUser.role === "admin" ? (
+        <Mutation
+          mutation={DELETE_TEST}
+          variables={{ _id }}
+          key={_id}
+          update={(cache, { data: { deleteTest } }) => {
+            const { getTests } = cache.readQuery({
+              query: GET_TESTS
+            });
 
-                cache.writeQuery({
-                  query: GET_TESTS,
-                  data: {
-                    getTests: getTests.filter(
-                      test => test._id !== deleteTest._id
-                    )
-                  }
-                });
-              }}
-            >
-              {deleteTest => {
-                return (
-                  <span
-                    className="delete-button"
-                    onClick={() => handleDelete(deleteTest)}
-                  >
-                    <FontAwesomeIcon icon="times" />
-                  </span>
-                );
-              }}
-            </Mutation>
-          );
-        }
-        return false;
-      })}
+            cache.writeQuery({
+              query: GET_TESTS,
+              data: {
+                getTests: getTests.filter(test => test._id !== deleteTest._id)
+              }
+            });
+          }}
+        >
+          {deleteTest => {
+            return (
+              <span
+                className="delete-button"
+                onClick={() => handleDelete(deleteTest)}
+              >
+                <FontAwesomeIcon icon="times" />
+              </span>
+            );
+          }}
+        </Mutation>
+      ) : null}
     </div>
   </li>
 );

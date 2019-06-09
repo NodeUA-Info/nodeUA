@@ -91,6 +91,6 @@ class AddChapter extends Component {
   }
 }
 
-export default withAuth(session => session && session.getCurrentUser)(
-  withRouter(AddChapter)
-);
+export default withAuth(
+  session => session && session.getCurrentUser.role === "admin"
+)(withRouter(AddChapter));
