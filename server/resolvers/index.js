@@ -40,10 +40,15 @@ const resolvers = {
 
 
   Mutation: {
+<<<<<<< HEAD
     addChapter: async (root, { title, uri }, { Chapter }) => {
       // Create a new record in the database
       // Save the record and return it
       const newChapter = await new Chapter({ title: title, uri: uri }).save();
+=======
+    addChapter: async (root, { title, content }, { Chapter }) => {
+      const newChapter = await new Chapter({ title: title, content: content }).save();
+>>>>>>> add-tests
       return newChapter;
     },
 
@@ -94,6 +99,17 @@ const resolvers = {
       });
       console.log(results);
 
+      let counter = 0;
+      results.map(result => {
+        
+        if (result) {
+          counter += 1;
+        }
+      })
+      
+      const score = counter / results.length * 100;
+      console.log("score: ", score);
+
       const user = await User.findOne({ _id });
 
       console.log("user before update:", user);
@@ -122,7 +138,8 @@ const resolvers = {
 
       let testResult = {
         "results": results,
-        "testName": title
+        "testName": title,
+        "score": score
       };;
 
       if (isNewResult) {
@@ -132,7 +149,7 @@ const resolvers = {
         });
         console.log("user after update(isNewResult=true):", updatedUser);
       } else if (!isNewResult) {
-        const updatedUser = await User.findOneAndUpdate({ 'testResults._id': id }, { '$set': { 'testResults.$.results': results } }, { "new": true }, function (err) {
+        const updatedUser = await User.findOneAndUpdate({ 'testResults._id': id }, { '$set': { 'testResults.$.results': results, 'testResults.$.score': score } }, { "new": true }, function (err) {
           if (err) throw new Error(err)
           console.log("Successfully saved!");
         });
