@@ -5,6 +5,7 @@ const user = gql`
     _id: ID
     testName: String
     results: [Boolean]
+    score: Float
   }
 
   type User {

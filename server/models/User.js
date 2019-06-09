@@ -10,6 +10,9 @@ const TestResultSchema = new Schema({
   },
   results: {
     type: [Boolean]
+  },
+  score: {
+    type: Number
   }
 })
 
