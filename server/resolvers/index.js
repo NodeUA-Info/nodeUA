@@ -38,7 +38,6 @@ const resolvers = {
     }
   },
 
-
   Mutation: {
     addChapter: async (root, { title, uri }, { Chapter }) => {
       const newChapter = await new Chapter({ title: title, uri: uri }).save();
