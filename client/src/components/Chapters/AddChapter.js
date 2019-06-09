@@ -54,7 +54,6 @@ class AddChapter extends Component {
         {(addChapter, { data, loading, error }) => {
           return (
             <div className="App">
-              <h2 className="form_title">Додати тест</h2>
               <Container className="form_container_test">
                 <Form
                   className="form_test"

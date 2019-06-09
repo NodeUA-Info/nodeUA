@@ -92,7 +92,6 @@ class AddTest extends Component {
           // console.log(data);
           return (
             <div className="App">
-              <h2 className="form_title">Додати тест</h2>
               <Container className="form_container_test">
                 <Form
                   className="form_test"

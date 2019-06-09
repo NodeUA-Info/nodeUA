@@ -51,11 +51,6 @@ class Navigation extends Component {
 const NavbarUnAuth = () => (
   <Nav className="ml-auto" navbar>
     <NavItem>
-      <NavLink tag={RRNavLink} to="/tests" className="nav_link">
-        <span>Перевірка знань</span>
-      </NavLink>
-    </NavItem>
-    <NavItem>
       <NavLink tag={RRNavLink} to="/signin" className="nav_link">
         <span>
           Вхід <FontAwesomeIcon icon="sign-in-alt" />
@@ -77,11 +72,6 @@ const NavbarAuth = () => (
     <NavItem>
       <NavLink tag={RRNavLink} to="/tests" className="nav_link">
         <span>Перевірка знань</span>
-      </NavLink>
-    </NavItem>
-    <NavItem>
-      <NavLink tag={RRNavLink} to="/chapter/add" className="nav_link">
-        <span>+Статтю</span>
       </NavLink>
     </NavItem>
     <NavItem>

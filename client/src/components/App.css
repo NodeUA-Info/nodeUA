@@ -225,3 +225,43 @@ ol {
   left: -0.5em;
   border-left-color: #6cc24a;
 }
+
+/* Profile */
+
+.wrap {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.profile_title {
+  text-align: center;
+  margin: 20px;
+}
+.profile_results_title {
+  text-align: center;
+  margin: 20px;
+  margin-bottom: 2em;
+}
+
+.profile_attention {
+  text-align: center;
+  margin: 30px;
+  font-size: 20px;
+  color: #5a5a5a;
+}
+
+.admin_links {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.btn-info {
+  margin-right: 10px;
+}
+
+.admin_link,
+.admin_link:hover {
+  text-decoration: none;
+  color: whitesmoke;
+}
