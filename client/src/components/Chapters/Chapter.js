@@ -1,5 +1,4 @@
 import React from "react";
-import { ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const Chapter = ({ _id, title }) => (

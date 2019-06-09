@@ -7,7 +7,7 @@ const UserInfo = ({ session }) => {
   return (
     <Fragment>
       <div>
-        <h2 className="profile_title">{username}</h2>
+        <h2 className="test_list__header">{username}</h2>
         <div className="profile_container">
           <h3 className="profile_results_title">Результати тестування</h3>
           <Table>

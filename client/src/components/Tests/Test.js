@@ -60,6 +60,7 @@ const Test = ({ _id, title, session }) => (
             </Mutation>
           );
         }
+        return false;
       })}
     </div>
   </li>

@@ -7,14 +7,7 @@ import { GET_TEST } from "../../queries";
 import { CHECK_TEST } from "../../queries";
 import Result from "./Result";
 
-import {
-  ListGroup,
-  ListGroupItem,
-  Button,
-  FormGroup,
-  Label,
-  Input
-} from "reactstrap";
+import { Button } from "reactstrap";
 
 const newQuestions = [];
 let id = "";
@@ -111,18 +104,21 @@ class TestPage extends Component {
                 if (index >= 0 && index < modifiedQuestions.length) {
                   return (
                     <div className="App">
-                      <h2>{title}</h2>
+                      <h2 className="test_list__header">{title}</h2>
                       <div>
-                        <h2>{question.questionText}</h2>
-                        <ListGroup>
-                          <FormGroup>
+                        <div className="answer_container">
+                          <h2 className="question_text">
+                            {question.questionText}
+                          </h2>
+                          <ul className="answer_list">
                             {this.shuffleArray(question.answers)}
                             {question.answers.map((answer, index) => {
                               return (
-                                <ListGroupItem key={index}>
-                                  <Label check>
-                                    <Input
+                                <li key={index} className="answer_li">
+                                  <label>
+                                    <input
                                       type="radio"
+                                      className="form-radio"
                                       name={radioName}
                                       onChange={e =>
                                         this.handleChange(
@@ -133,13 +129,12 @@ class TestPage extends Component {
                                       }
                                     />
                                     {answer.answerText}
-                                  </Label>
-                                </ListGroupItem>
+                                  </label>
+                                </li>
                               );
                             })}
-                          </FormGroup>
-                        </ListGroup>
-
+                          </ul>
+                        </div>
                         <Button
                           onClick={e =>
                             this.goToNext(
@@ -150,7 +145,7 @@ class TestPage extends Component {
                             )
                           }
                         >
-                          next
+                          Далі
                         </Button>
                       </div>
                     </div>

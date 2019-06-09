@@ -2,7 +2,6 @@ import React from "react";
 import { Query } from "react-apollo";
 import { GET_CHAPTERS } from "../../queries";
 import Chapter from "./Chapter";
-import { ListGroup } from "reactstrap";
 
 import "./styles/ChapterList.css";
 

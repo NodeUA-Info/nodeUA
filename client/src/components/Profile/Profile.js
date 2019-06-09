@@ -8,10 +8,10 @@ const Profile = ({ session }) => {
   return (
     <div className="wrap">
       <UserInfo session={session} />
-      {session.getCurrentUser.roles.map(role => {
+      {session.getCurrentUser.roles.map((role, index) => {
         if (role === "admin") {
           return (
-            <div className="admin_links">
+            <div className="admin_links" key={index}>
               <Button color="info">
                 <Link className="admin_link" to="/test/add">
                   Додати тест
@@ -25,6 +25,7 @@ const Profile = ({ session }) => {
             </div>
           );
         }
+        return false;
       })}
     </div>
   );
