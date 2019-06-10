@@ -4,7 +4,7 @@ import withAuth from "../withAuth";
 
 import { Query, Mutation } from "react-apollo";
 import { GET_TEST } from "../../queries";
-import { CHECK_TEST } from "../../queries";
+import { CHECK_TEST, GET_CURRENT_USER } from "../../queries";
 import Result from "./Result";
 
 import { Button } from "reactstrap";
@@ -98,6 +98,7 @@ class TestPage extends Component {
             <Mutation
               mutation={CHECK_TEST}
               variables={{ _id: id, questions: newQuestions, title }}
+              refetchQueries={() => [{ query: GET_CURRENT_USER }]}
             >
               {(checkTest, { loading, error }) => {
                 // console.log({ _id: id, questions: newQuestions });
