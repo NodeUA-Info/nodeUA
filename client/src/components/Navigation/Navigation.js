@@ -53,14 +53,15 @@ const NavbarUnAuth = () => (
     <NavItem>
       <NavLink tag={RRNavLink} to="/signin" className="nav_link">
         <span>
-          Вхід <FontAwesomeIcon icon="sign-in-alt" />
+          Вхід <FontAwesomeIcon className="awesome_icon" icon="sign-in-alt" />
         </span>
       </NavLink>
     </NavItem>
     <NavItem>
       <NavLink tag={RRNavLink} to="/signup" className="nav_link">
         <span>
-          Реєстрація <FontAwesomeIcon icon="user-plus" />
+          Реєстрація{" "}
+          <FontAwesomeIcon className="awesome_icon" icon="user-plus" />
         </span>
       </NavLink>
     </NavItem>
@@ -77,7 +78,7 @@ const NavbarAuth = () => (
     <NavItem>
       <NavLink tag={RRNavLink} to="/profile" className="nav_link">
         <span>
-          Профіль <FontAwesomeIcon icon="user" />
+          Профіль <FontAwesomeIcon className="awesome_icon" icon="user" />
         </span>
       </NavLink>
     </NavItem>

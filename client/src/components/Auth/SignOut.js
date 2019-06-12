@@ -15,7 +15,7 @@ const SignOut = ({ history }) => (
     {client => {
       return (
         <span onClick={() => handleSignOut(client, history)}>
-          Вийти <FontAwesomeIcon icon="sign-out-alt" />
+          Вийти <FontAwesomeIcon className="awesome_icon" icon="sign-out-alt" />
         </span>
       );
     }}

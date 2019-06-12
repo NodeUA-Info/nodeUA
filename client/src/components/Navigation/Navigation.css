@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Exo+2:500&display=swap");
+
 .main_nav {
   display: flex;
   align-items: center;
@@ -7,6 +9,7 @@
   /* background-position: center; */
   background-color: #6cc24a;
   font-size: 14px;
+  min-height: 7vh;
 }
 
 .nav_container {
@@ -16,8 +19,14 @@
 
 .nav_link {
   font-size: 1.5rem;
-  font-weight: 600;
+  /* font-weight: 600; */
   margin-left: 20px;
+  font-family: "Exo 2", sans-serif;
+  transition: color 0.2s;
+}
+
+.awesome_icon {
+  font-size: 20px;
 }
 
 .nav_content {
@@ -25,7 +34,7 @@
 }
 
 .logo {
-  height: 4rem;
+  height: 3rem;
 }
 
 .transparent {

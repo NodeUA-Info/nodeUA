@@ -137,6 +137,7 @@ class TestPage extends Component {
                           </ul>
                         </div>
                         <Button
+                          className="next_btn"
                           onClick={e =>
                             this.goToNext(
                               e,

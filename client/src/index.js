@@ -47,9 +47,8 @@ const Root = ({ refetch, session }) => (
           path="/chapter/add"
           render={() => <AddChapter refetch={refetch} />}
         />
-
-        <Route path="/profile" render={() => <Profile session={session} />} />
         <Route path="/chapters/:_id" component={ChapterPage} />
+        <Route path="/profile" render={() => <Profile session={session} />} />
         <Route path="/tests" render={() => <TestList session={session} />} />
         <Route
           path="/test/:_id"
