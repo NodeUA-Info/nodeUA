@@ -151,6 +151,10 @@ const resolvers = {
     },
 
     deleteTest: async (root, {_id}, {Test}) => {
+      const test = await Test.findOne({_id: _id});
+      if(!test) {
+        throw new Error('Test not found');
+      }
       const deletedTest = await Test.findByIdAndDelete(_id);
       // console.log(deletedTest);
       return deletedTest;
