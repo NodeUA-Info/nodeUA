@@ -156,7 +156,7 @@ class TestPage extends Component {
                   const { score } = this.state;
                   return (
                     <div className="App">
-                      <h2>{title}</h2>
+                      <h2 className="test_list__header">{title}</h2>
                       <Result score={score} questionsCount={questions.length} />
                     </div>
                   );

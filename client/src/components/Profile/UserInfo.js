@@ -7,7 +7,7 @@ const UserInfo = ({ session }) => {
   return (
     <div className="profile_container">
       <h3 className="profile_results_title">Результати тестування</h3>
-      <Table bordered hover responsive>
+      <Table bordered hover responsive className="table_result">
         <thead>
           <tr>
             <th>#</th>

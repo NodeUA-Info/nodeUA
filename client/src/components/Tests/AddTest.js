@@ -45,16 +45,13 @@ class AddTest extends Component {
     const { answers } = this.state;
 
     const newAnswersArr = JSON.parse(JSON.stringify(answers));
-    // console.log(newAnswersArr);
     newAnswersArr[index][name] = value;
     this.setState({ answers: newAnswersArr });
   };
 
   addQuestion = () => {
     const newState = Object.assign({}, this.state);
-    // console.log(newState);
     questions.push(newState);
-    // console.log(questions);
     counter = questions.length;
     this.clearState();
   };
@@ -64,6 +61,7 @@ class AddTest extends Component {
     addTest().then(({ data }) => {
       console.log(data);
     });
+    counter = 0;
     this.props.history.push("/tests");
   };
 
@@ -80,16 +78,13 @@ class AddTest extends Component {
 
   render() {
     const { questionText, answers } = this.state;
-    // console.log(answers[1].answer2);
-    // console.log(questions);
     return (
       <Mutation
         mutation={ADD_TEST}
         variables={{ questions, title }}
         // update={this.updateCache}
       >
-        {(addTest, { data, loading, error }) => {
-          // console.log(data);
+        {(addTest, { loading, error }) => {
           return (
             <div className="App">
               <Container className="form_container_test">
@@ -103,6 +98,7 @@ class AddTest extends Component {
                       type="text"
                       name="title"
                       onChange={this.handleTitleChange}
+                      placeholder="Назва тесту"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -112,6 +108,7 @@ class AddTest extends Component {
                       name="questionText"
                       onChange={this.handleQuestionChange}
                       value={questionText}
+                      placeholder="Питання"
                     />
                   </FormGroup>
                   <h4 className="test_title">Варіанти відповідей</h4>
